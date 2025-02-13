@@ -1,0 +1,35 @@
+{
+    "manifest_version": 3,
+    "name": "Speedify",
+    "description": "extensions by Quema",
+    "version": "4.0.0",
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "scripting",
+        "cookies",
+        "declarativeContent",
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://open.spotify.com/*"
+            ],
+            "js": [
+                "injection.js"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "injectionfile.js",
+                "main.js"
+            ],
+            "matches": [
+                "https://open.spotify.com/*"
+            ]
+        }
+    ]
+}
