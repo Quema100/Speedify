@@ -3,6 +3,11 @@
     "name": "Speedify",
     "description": "extensions by Quema",
     "version": "0.0.1",
+    "icons": {
+        "16": "img/Speedify.png",
+        "48": "img/Speedify.png",
+        "128": "img/Speedify.png"
+    },
     "permissions": [
         "tabs",
         "activeTab",
