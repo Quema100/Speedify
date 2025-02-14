@@ -65,7 +65,7 @@ const box = () => {
             setPlaybackRate(rate);
         }, 200);
     };
-
+    
     newInput.addEventListener('input', () => {
         const newRate = parseFloat(newInput.value);
         if (!isNaN(newRate) && newRate >= newInput.min && newRate <= newInput.max) {
