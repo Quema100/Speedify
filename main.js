@@ -63,7 +63,7 @@ const box = () => {
 
         intervalId = setInterval(() => {
             setPlaybackRate(rate);
-        }, 100);
+        }, 200);
     };
 
     newInput.addEventListener('input', () => {
