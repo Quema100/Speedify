@@ -27,7 +27,7 @@ const box = () => {
     newInput.value = 1;
     newInput.min = 0.1;
     newInput.max = 16;
-    newInput.step = 1;
+    newInput.step = 0.1;
 
     newInput.style.padding = '5px';
     newInput.style.border = '2px solid rgba(31, 31, 31, 0.39)';
