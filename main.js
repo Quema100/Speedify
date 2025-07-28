@@ -18,8 +18,8 @@ const box = () => {
             -moz-appearance: textfield;
         }
     `;
-    document.head.appendChild(style);   
-    
+    document.head.appendChild(style);
+
     const newInput = document.createElement('input');
 
     newInput.type = 'number';
@@ -41,7 +41,7 @@ const box = () => {
     newInput.style.transition = 'border-color 0.3s ease';
 
     newInput.addEventListener('focus', () => {
-        newInput.style.borderColor = '#e74c3c';  
+        newInput.style.borderColor = '#e74c3c';
     });
 
     newInput.addEventListener('blur', () => {
@@ -65,7 +65,7 @@ const box = () => {
             setPlaybackRate(rate);
         }, 200);
     };
-    
+
     newInput.addEventListener('input', () => {
         const newRate = parseFloat(newInput.value);
         if (!isNaN(newRate) && newRate >= newInput.min && newRate <= newInput.max) {
