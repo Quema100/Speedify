@@ -11,15 +11,12 @@ const setAdSkip = () => {
 }
 
 setInterval(() => {
-    const videos = document.querySelectorAll('video, audio');
-    console.log(document.title.includes('AD' || '광고'))
-    if (videos.length > previousCount && document.title.includes('AD' || '광고')) {
-        setAdSkip
+    console.log(['AD', '광고'].some(keyword => document.title.includes(keyword)))
+    if (videoElements.length > previousCount && ['AD', '광고'].some(keyword => document.title.includes(keyword))) {
+        setAdSkip()
     } else console.log('No changes detected.');
-
-    previousCount = videos.length;
-
-},1000);
+    previousCount = videoElements.length;
+}, 1000);
 
 
 const originalCreateElement = document.constructor.prototype.createElement;
@@ -30,7 +27,6 @@ document.createElement = function (message) {
         console.log('🎥 Video or audio element created:', element);
         videoElements.push(element);
         console.log('🎥 Video elements:', videoElements);
-        previousCount = videoElements.length
     }
     return element;
 };
