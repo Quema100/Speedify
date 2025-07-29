@@ -1,5 +1,4 @@
 let videoElements = [];
-let previousCount = 0;
 
 const setAdSkip = () => {
     let validVideos = Array.from(videoElements).filter(video => !isNaN(video.duration));
@@ -11,11 +10,10 @@ const setAdSkip = () => {
 }
 
 setInterval(() => {
-    console.log(['AD', '광고'].some(keyword => document.title.includes(keyword)))
-    if (videoElements.length > previousCount && ['AD', '광고'].some(keyword => document.title.includes(keyword))) {
+    console.log(['Spotify – Advertisement', 'Spotify – 광고'].some(keyword => document.title.includes(keyword)))
+    if (['Spotify – Advertisement', 'Spotify – 광고'].some(keyword => document.title.includes(keyword))) {
         setAdSkip()
     } else console.log('No changes detected.');
-    previousCount = videoElements.length;
 }, 1000);
 
 
