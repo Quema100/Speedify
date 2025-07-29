@@ -23,6 +23,7 @@ const box = () => {
     const newInput = document.createElement('input');
 
     newInput.type = 'number';
+    newInput.name= 'rate';
     newInput.placeholder = 'speed';
     newInput.value = 1;
     newInput.min = 0.1;
