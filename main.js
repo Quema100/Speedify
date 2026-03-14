@@ -1,6 +1,6 @@
 let intervalId;
-
-const box = () => {
+const initPlaybackControl = () => {
+    console.log("Initializing playback speed control...");
     const playbackDurationElement = document.querySelector('[data-testid="playback-duration"]');
 
     const newDiv = document.createElement('div');
@@ -23,7 +23,7 @@ const box = () => {
     const newInput = document.createElement('input');
 
     newInput.type = 'number';
-    newInput.name= 'rate';
+    newInput.name = 'rate';
     newInput.placeholder = 'speed';
     newInput.value = 1;
     newInput.min = 0.1;
@@ -86,11 +86,23 @@ const box = () => {
 
     if (playbackDurationElement) {
         playbackDurationElement.insertAdjacentElement('afterend', newDiv);
+        return true;
     } else {
         console.error('playback-duration div not found');
+        return false;
     }
 }
 
-setTimeout(() => {
-    box();
-}, 3000);
+const observer = new MutationObserver(() => {
+    const playbackDurationElement = document.querySelector('[data-testid="playback-duration"]');
+
+    if (playbackDurationElement) {
+        initPlaybackControl();
+        observer.disconnect();
+    }
+});
+
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});

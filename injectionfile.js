@@ -10,9 +10,7 @@ const setAdSkip = () => {
 }
 
 setInterval(() => {
-    console.log(['Spotify – Advertisement', 'Spotify – 광고'].some(keyword => document.title.includes(keyword)))
     if (['Spotify – Advertisement', 'Spotify – 광고'].some(keyword => document.title.includes(keyword))) setAdSkip();
-    else console.log('No changes detected.');
 }, 1000);
 
 
@@ -21,9 +19,7 @@ const originalCreateElement = document.constructor.prototype.createElement;
 document.createElement = function (message) {
     const element = originalCreateElement.call(document, message);
     if (message === 'video' || message === 'audio') {
-        console.log('🎥 Video or audio element created:', element);
         videoElements.push(element);
-        console.log('🎥 Video elements:', videoElements);
     }
     return element;
 };
