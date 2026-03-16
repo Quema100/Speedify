@@ -1,6 +1,8 @@
 let intervalId;
+
 const initPlaybackControl = () => {
     console.log("Initializing playback speed control...");
+
     const playbackDurationElement = document.querySelector('[data-testid="playback-duration"]');
 
     const newDiv = document.createElement('div');
