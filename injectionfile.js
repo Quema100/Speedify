@@ -11,7 +11,7 @@ const setAdSkip = () => {
 
 setInterval(() => {
     if (['Spotify – Advertisement', 'Spotify – 광고'].some(keyword => document.title.includes(keyword))) setAdSkip();
-}, 1000);
+}, 500);
 
 
 const originalCreateElement = document.constructor.prototype.createElement;
