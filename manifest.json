@@ -8,14 +8,6 @@
         "48": "img/Speedify.png",
         "128": "img/Speedify.png"
     },
-    "permissions": [
-        "tabs",
-        "activeTab",
-        "scripting",
-        "cookies",
-        "declarativeContent",
-        "storage"
-    ],
     "content_scripts": [
         {
             "matches": [
