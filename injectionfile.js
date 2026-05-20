@@ -1,33 +1,65 @@
 let videoElements = [];
+let adMonitorInterval = null;
+const skipCurrentAds = () => {
+    videoElements.forEach(video => {
+        if (isNaN(video.duration) || video.duration === 0) return;
+        if (video.currentTime >= video.duration - 0.5) return; 
 
-const setAdSkip = () => {
-    console.log('Attempting to skip ad...');
-    let validVideos = Array.from(videoElements).filter(video => !isNaN(video.duration));
-    validVideos.forEach(video => {
-        console.log('Setting ad skip for video:', video);
-        if (isNaN(video.duration)) return;
-        video.currentTime = video.duration
+        console.log('Skipping consecutive ad now:', video);
+
+        video.loop = false;
+        video.removeAttribute('loop');
+        video.muted = true;
+        video.currentTime = video.duration - 0.1;
+
+        video.play().catch(e => console.log('Play blocked by browser:', e));
     });
 };
 
-const title = document.querySelector('title');
+const startAdMonitor = () => {
+    if (adMonitorInterval) return; 
+    console.log('Ad state detected. Starting continuous monitor...');
+    
+    adMonitorInterval = setInterval(skipCurrentAds, 300);
+};
+
+const stopAdMonitor = () => {
+    if (adMonitorInterval) {
+        console.log('Ad finished. Stopping monitor.');
+        clearInterval(adMonitorInterval);
+        adMonitorInterval = null;
+    }
+};
+
+const titleNode = document.querySelector('title');
 
 const titleObserver = new MutationObserver(() => {
-    const title = document.title.toLowerCase();
+    if (!document.title) return;
 
-    const isAd =
-        title.includes('advertisement') ||
-        title.includes('광고');
+    const titleText = document.title.toLowerCase();
+    const isAd = titleText.includes('advertisement') || titleText.includes('광고');
 
-    if (isAd) setAdSkip();
-    console.log('Title changed:', document.title);
+    console.log('Title changed:', document.title, 'Is ad:', isAd);
+
+    if (isAd) {
+        startAdMonitor();
+    } else {
+        stopAdMonitor();
+    }
 });
 
-titleObserver.observe(title, {
-    subtree: true,
-    characterData: true,
-    childList: true
-});
+if (titleNode) {
+    titleObserver.observe(titleNode, {
+        subtree: true,
+        characterData: true,
+        childList: true
+    });
+    
+    const initialTitle = document.title.toLowerCase();
+    if (initialTitle.includes('advertisement') || initialTitle.includes('광고')) {
+        startAdMonitor();
+    }
+}
 
 
 const originalCreateElement = document.constructor.prototype.createElement;
