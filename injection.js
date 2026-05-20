@@ -1,11 +1,13 @@
-const injectScript = (file) => {
+const injectScript = (file, callback) => {
     const script = document.createElement('script');
     script.src = chrome.runtime.getURL(file);
-    script.onload = () => script.remove();
+    script.onload = () => {
+        script.remove();
+        if (callback) callback();
+    };
     (document.head || document.documentElement).appendChild(script);
 };
 
-window.onload = () => {
-    injectScript('injectionfile.js');
-    injectScript('main.js'); 
-};
+injectScript('injectionfile.js', () => {
+    injectScript('main.js');
+});

@@ -7,6 +7,7 @@ const initPlaybackControl = () => {
 
     const newDiv = document.createElement('div');
     newDiv.style.display = 'inline-block';
+    newDiv.id = 'playback-speed-control';
 
     const style = document.createElement('style');
     style.innerHTML = `
@@ -98,9 +99,8 @@ const initPlaybackControl = () => {
 const observer = new MutationObserver(() => {
     const playbackDurationElement = document.querySelector('[data-testid="playback-duration"]');
 
-    if (playbackDurationElement) {
+    if (playbackDurationElement && !document.getElementById('playback-speed-control')) {
         initPlaybackControl();
-        observer.disconnect();
     }
 });
 
